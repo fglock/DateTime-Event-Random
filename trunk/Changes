@@ -1,4 +1,6 @@
 
+0.02_02  2004-03-15
+- update to new DateTime::Set specs
 - more tests, revised README and TODO
 - added a note on README about tests that may fail.
 - use a slightly different density formula 

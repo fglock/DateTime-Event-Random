@@ -7,7 +7,7 @@ use vars qw( $VERSION @ISA );
 use Carp;
 
 BEGIN {
-    $VERSION = 0.02_01;
+    $VERSION = 0.02_02;
 }
 
 sub new_cached {
@@ -52,10 +52,12 @@ sub new_cached {
 
     my $cached_set = DateTime::Set->from_recurrence(
         next =>  sub {
+                    return $_[0] if $_[0]->is_infinite;
                     my ( undef, $next ) = &$get_cached( $_[0] );
                     return $next;
                  },
         previous => sub {
+                    return $_[0] if $_[0]->is_infinite;
                     my ( $previous, undef ) = &$get_cached( $_[0] );
                     return $previous;
                  },
@@ -71,9 +73,11 @@ sub new {
     my $density = $class->_random_init( \%args );
     return DateTime::Set->from_recurrence(
         next =>     sub {
+                        return $_[0] if $_[0]->is_infinite;
                         $_[0] + $class->_random_duration( $density );
                     },
         previous => sub {
+                        return $_[0] if $_[0]->is_infinite;
                         $_[0] - $class->_random_duration( $density );
                     },
         %args,
