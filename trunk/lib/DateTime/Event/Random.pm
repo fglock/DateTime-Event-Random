@@ -335,6 +335,8 @@ objects with random values.
 
 =head1 USAGE
 
+=over 4
+
 =item * new
 
 Creates a C<DateTime::Set> object that contains random events.
@@ -417,8 +419,11 @@ duration:
 
     $dur = DateTime::Event::Random->duration( days => 15 );
 
+=back
 
 =head1 INTERNALS
+
+=over 4
 
 =item * _random_init
 
@@ -432,9 +437,11 @@ random distributions. The default random distribution is "uniform".
 
 The I<internals> API is not stable.
 
+=back
 
 =head1 COOKBOOK
 
+=over 4
 
 =item * Make a random datetime
 
@@ -495,6 +502,7 @@ length of day problems, such as DST changes and leap seconds:
   print "weekday " .   $dt->day_of_week . "\n";
   print "month day " . $dt->day . "\n";
 
+=back
 
 =head1 AUTHOR
 
