@@ -104,17 +104,33 @@ sub _random_init {
 
     $density = 24*60*60 unless $density;  # default = 1 day
 
-    return $density;
+    return {
+        density => $density,
+        starting => 1,
+    };
 }
 
 sub _random_duration {
     my $class = shift;
-    my $density = shift;
+    my $param = shift;
 
-    # this is a density function that approximates to 
-    # the "duration" in seconds between two random dates.
-    # $_[0] is the target average duration, in seconds.
-    my $tmp = log( 1 - rand ) * ( - $density );
+    my $tmp;
+    if ( $param->{starting} )
+    {
+        $param->{starting} = 0;
+
+        # this is a density function that approximates to 
+        # the "duration" in seconds between a random and
+        # a non-random date.
+        $tmp = log( 1 - rand ) * ( - $param->{density} / 2 );
+    }
+    else
+    {
+        # this is a density function that approximates to 
+        # the "duration" in seconds between two random dates.
+        $tmp = log( 1 - rand ) * ( - $param->{density} );
+    }
+
 
     # split into "days", "seconds" and "nanoseconds"
 

@@ -2,7 +2,7 @@
 
 use strict;
 
-use Test::More tests => 4;
+use Test::More tests => 12;
 
 use DateTime;
 use DateTime::Event::Random;
@@ -38,25 +38,39 @@ use DateTime::Event::Random;
 
 }
 
+
+my $sum1 = 0;
+my $count1 = 0;
+my $todo_count = 10;
+for my $unit ( qw( nanoseconds seconds minutes hours days weeks months years ) )
 {
     my $sum = 0;
     my $count = 0;
     for ( 1 .. 5 ) {
-        my $daily = DateTime::Event::Random->new( days => 2 );
-        my @dt = $daily->as_list( start => $dt1, end => $dt2 );
-        # warn "Count is ".( 1 + $#dt)." days\n";
+        my $daily = DateTime::Event::Random->new( $unit => 200 );
+        my @dt = $daily->as_list( 
+                     start => $dt1, 
+                     end =>   $dt1->clone->add( $unit => 200 * $todo_count ) );
+        # warn "Count is ".( 1 + $#dt)." $unit\n";
         $sum += 1 + $#dt;
         $count++;
         # my $r = join(' ', map { $_->datetime } @dt);
         # is( $r,
-        #    '2003-04-29T00:00:00 2003-04-30T00:00:00 2003-05-01T00:00:00',
+        #    ' ? ',
         #    "as_list" );
     }
     my $mean = $sum/$count;
-    ok( $mean > 4 && $mean < 16,
-        "Average days in span = $mean, expected about 10" );
+    ok( $mean > ( 0.4 * $todo_count ) && 
+        $mean < ( 1.6 * $todo_count ),
+        "Average $unit in span = $mean, expected about $todo_count" );
 
+    $sum1 += $mean;
+    $count1 ++;
 }
+my $mean1 = $sum1/$count1;
+ok( $mean1 > ( 0.4 * $todo_count ) && 
+    $mean1 < ( 1.6 * $todo_count ),
+    "Average mean = $mean1, expected close to $todo_count" );
 
 {
 my $dur = DateTime::Event::Random->duration;

@@ -1,6 +1,6 @@
 OVERVIEW
 
-This module aims to support sets of random datetimes.
+This module creates DateTime::* objects with random values.
 
 INSTALLATION
 
@@ -11,3 +11,13 @@ directory:
    make
    make test
    make install
+
+A NOTE ON FAILING TESTS
+
+If a test fail, please rerun the test.
+
+That's because some tests depend on averaging the result
+of operations on random numbers, and they _may_ eventually fail.
+
+If the test continues failing, please report using CPAN or 
+to the datetime@perl.org mailing list.

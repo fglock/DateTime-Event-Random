@@ -1,3 +1,13 @@
+
+- more tests, revised README and TODO
+- added a note on README about tests that may fail.
+- use a slightly different density formula 
+  for calculating the first element of a set.
+  This should give a better distribution for 
+  $set->next($dt) on an unbounded, uncached set -
+  but only the first time it is called (this is 
+  still in the TODO list)
+
 0.02_01  2004-01-08
 - POD fixes
 
