@@ -1,0 +1,28 @@
+TODO list for Perl module DateTime::Event::Random
+
+Organize the TODO list :)
+
+Maybe implement truncate_to => 'days'
+
+How to obtain shuffled datetimes?
+
+How to obtain exactly an event per week?
+
+Find out some links about the "density function"
+
+Implement other random distributions
+- implement next/previous instead of "duration"
+
+Optimize new_cached()
+
+Optimize duration()
+
+$set->next($dt) on an unbounded, uncached set should use a different
+density value (0.5 density)
+
+Documented problems - from the POD:
+
+Note that, although the datetime values are random,
+the accessors (C<as_list>, C<iterator/next/previous>) always 
+return sorted datetimes.
+
