@@ -324,6 +324,17 @@ sub time_zone {
     return DateTime::TimeZone->new( name => $name );
 }
 
+sub locale {
+    my $class = shift;
+    carp "Missing class name in call to ".__PACKAGE__."->locale()"
+        unless defined $class;
+    my $names;
+    my $name;
+    $names = DateTime::Locale::ids;
+    $name = $names->[ rand( $#$names + 1 ) ];
+    return DateTime::Locale->load( $name );
+}
+
 1;
 
 __END__
@@ -367,8 +378,11 @@ DateTime::Event::Random - DateTime extension for creating random datetimes.
 =head1 DESCRIPTION
 
 This module provides convenience methods that let you easily create
-C<DateTime::Set>, C<DateTime>, or C<DateTime::Duration>
-objects with random values.
+C<DateTime>, C<DateTime::Set>, and C<DateTime::Duration>
+objects with random values. 
+
+It can also create C<DateTime::TimeZone>
+and C<DateTime::Locale> objects.
 
 
 =head1 USAGE
@@ -441,7 +455,8 @@ If a C<span> is specified, then the returned value will be within the span:
     $dt = DateTime::Event::Random->datetime( after => DateTime->now );
 
 You can also specify C<locale> and C<time_zone> parameters,
-just like in C<< DateTime->new() >>.
+just like in C<< DateTime->new() >>. 
+See also the C<time_zone> and C<locale> methods, below.
 
 
 =item * duration
@@ -467,6 +482,12 @@ If a category is specified, return a time zone in the category:
 
     $tz = DateTime::Event::Random->time_zone( category => 'Pacific' );
     
+=item * locale
+
+Returns a random C<DateTime::Locale> object.
+
+    $locale = DateTime::Event::Random->locale;
+   
 =back
 
 =head1 INTERNALS

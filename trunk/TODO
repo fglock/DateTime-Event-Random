@@ -1,6 +1,6 @@
 TODO list for Perl module DateTime::Event::Random
 
-time_zone tests
+time_zone / locale tests
 
 implement span() ?
 

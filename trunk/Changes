@@ -1,7 +1,8 @@
 
-- New method: 
+- New methods: 
   time_zone()
   time_zone( category => 'Africa' );
+  locale()
 
 0.03     2004-03-17
 0.02_02  2004-03-15
