@@ -1,5 +1,7 @@
 TODO list for Perl module DateTime::Event::Random
 
+time_zone tests
+
 implement span() ?
 
 Actually _test_ the distribution for randomness.

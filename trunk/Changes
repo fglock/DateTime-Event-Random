@@ -1,4 +1,8 @@
 
+- New method: 
+  time_zone()
+  time_zone( category => 'Africa' );
+
 0.03     2004-03-17
 0.02_02  2004-03-15
 - update to new DateTime::Set specs

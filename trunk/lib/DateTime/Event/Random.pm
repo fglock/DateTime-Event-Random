@@ -302,6 +302,28 @@ sub duration {
     return DateTime->now() - $class->datetime();
 }
 
+sub time_zone {
+    my $class = shift;
+    carp "Missing class name in call to ".__PACKAGE__."->time_zone()"
+        unless defined $class;
+    my %param = @_;
+    my $category = delete $param{category};
+    my $names;
+    my $name;
+    if ( $category ) 
+    {
+        $names = DateTime::TimeZone::names_in_category( $category );
+        return unless defined $names;
+        $name = $category . '/' . $names->[ rand( $#$names + 1 ) ];
+    }
+    else
+    {
+        $names = DateTime::TimeZone::all_names;
+        $name = $names->[ rand( $#$names + 1 ) ];
+    }
+    return DateTime::TimeZone->new( name => $name );
+}
+
 1;
 
 __END__
@@ -435,6 +457,16 @@ duration:
 
     $dur = DateTime::Event::Random->duration( days => 15 );
 
+=item * time_zone
+
+Returns a random C<DateTime::TimeZone> object.
+
+    $tz = DateTime::Event::Random->time_zone;
+
+If a category is specified, return a time zone in the category:
+
+    $tz = DateTime::Event::Random->time_zone( category => 'Pacific' );
+    
 =back
 
 =head1 INTERNALS
