@@ -7,7 +7,7 @@ use vars qw( $VERSION @ISA );
 use Carp;
 
 BEGIN {
-    $VERSION = 0.02_02;
+    $VERSION = 0.03;
 }
 
 sub new_cached {

@@ -1,7 +1,7 @@
 # http://module-build.sourceforge.net/META-spec.html
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         DateTime-Event-Random
-version:      0.0201
+version:      0.03
 version_from: lib/DateTime/Event/Random.pm
 installdirs:  site
 requires:
