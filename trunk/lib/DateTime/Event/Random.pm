@@ -333,10 +333,6 @@ DateTime::Event::Random - DateTime extension for creating random datetimes.
  print "next is ", $dt_set->next( DateTime->today )->datetime, "\n";
  # output: next is 2004-02-29T22:00:51
 
- my $count = $dt_set->count;
- print "days $count \n";
- # output: days 8  -- should be a number near 6
-
  my @days = $dt_set->as_list;
  print join('; ', map{ $_->datetime } @days ) . "\n";
  # output: 2003-02-16T21:08:58; 2003-02-18T01:24:13; ...
@@ -508,8 +504,8 @@ length of day problems, such as DST changes and leap seconds:
   use DateTime::Event::Random;
   use DateTime::Event::Recurrence;
 
-  my $friday = DateTime::Event::Recurrence->monthly( days => 13 );
-  my $day_13 = DateTime::Event::Recurrence->weekly( days => 6 ); 
+  my $day_13 = DateTime::Event::Recurrence->monthly( days => 13 );
+  my $friday = DateTime::Event::Recurrence->weekly( days => 6 ); 
   my $friday_13 = $friday->intersection( $day_13 );
 
   my $dt = $friday_13->next( DateTime::Event::Random->datetime );
